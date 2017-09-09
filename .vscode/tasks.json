@@ -1,0 +1,23 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "taskName": "preRun",
+            "command": "cargo build",
+            "type": "shell",
+            "presentation": {
+                "reveal": "never"
+            }
+        },
+        {
+            "taskName": "preTest",
+            "command": "rm target/debug/track-camera-*; cargo test --no-run && rm target/debug/track-camera-*.d && cp target/debug/track-camera-* target/debug/track-camera-test",
+            "type": "shell",
+            "presentation": {
+                "reveal": "never"
+            }
+        }
+    ]
+}

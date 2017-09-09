@@ -1,0 +1,8 @@
+[package]
+authors = ["Andreas Stocker <shadowstep7@gmail.com>"]
+build = "build.rs"
+name = "track-camera"
+version = "0.1.0"
+
+[build-dependencies]
+bindgen = "0.30.0"
