@@ -1,9 +1,15 @@
 extern crate bindgen;
+extern crate cmake;
 
 use std::env;
 use std::path::PathBuf;
 
 fn main() {
+    // build glue 
+    let dst = cmake::build("webm_parser_glue");
+    println!("cargo:rustc-link-search=native={}", dst.display());
+    println!("cargo:rustc-link-lib=static=webm_parser_glue");
+
     println!("cargo:rustc-link-lib=webm");
     println!("cargo:rustc-link-lib=stdc++");
 
@@ -13,10 +19,10 @@ fn main() {
     let bindings = bindgen::Builder::default()
         // The input header we would like to generate
         // bindings for.
-        .header("wrapper.h")
+        .header("cpp_glue/webm_parser_glue.h")
         .enable_cxx_namespaces()
         .clang_args(&["-x", "c++", "-std=c++14"])
-        .whitelisted_type("webm::WebmParser")
+        // .whitelisted_type("webm::WebmParser")
         .generate()
         .expect("Unable to generate bindings");
 
