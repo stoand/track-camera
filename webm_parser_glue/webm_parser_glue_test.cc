@@ -29,8 +29,10 @@ TEST_CASE("Webm Parser", "[webm_parser]")
 {
     std::vector<char> sample_bytes = read_all_bytes(filename);
 
-    WebmData data = parse_webm_bytes(reinterpret_cast<const std::uint8_t *>(&sample_bytes[0]), sample_bytes.size());
+    const std::uint8_t * i_bytes = reinterpret_cast<const std::uint8_t *>(&sample_bytes[0]);
 
-    REQUIRE(1 == 1);
+    WebmData data = parse_webm_bytes(i_bytes, sample_bytes.size());
+
+    REQUIRE( data.status.completed_ok() );
 }
 }
