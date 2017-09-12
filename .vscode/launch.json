@@ -16,7 +16,7 @@
             "type": "lldb",
             "request": "launch",
             "name": "Test",
-            "program": "${workspaceRoot}/target/debug/track-camera-test",
+            "program": "${workspaceRoot}/target/debug/track_camera-test",
             "args": [],
             "cwd": "${workspaceRoot}",
             "preLaunchTask": "preTest"

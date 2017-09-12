@@ -6,4 +6,4 @@ version = "0.1.0"
 
 [build-dependencies]
 bindgen = "0.30.0"
-cmake = "0.1.25"
+gcc = { version = "0.3", features = ["parallel"] }

@@ -13,7 +13,7 @@
         },
         {
             "taskName": "preTest",
-            "command": "rm target/debug/track-camera-*; cargo test --no-run && rm target/debug/track-camera-*.d && cp target/debug/track-camera-* target/debug/track-camera-test",
+            "command": "rm target/debug/track_camera-* -f; cargo test --no-run && rm target/debug/track_camera-*.d -f && cp target/debug/track_camera-* target/debug/track_camera-test",
             "type": "shell",
             "presentation": {
                 "reveal": "never"

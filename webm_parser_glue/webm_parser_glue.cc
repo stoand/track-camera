@@ -1,11 +1,12 @@
 #include "webm_parser_glue.h"
 
-namespace webm_parser_glue {
+namespace webm_parser_glue
+{
 
-    int parse_webm_bytes() {
-        return 12342;
-    };
-
+WebmData parse_webm_bytes(const std::uint8_t *buf, std::size_t buf_size)
+{
+    return { nullptr,  0};
+};
 }
 
 // using namespace webm;

@@ -2,4 +2,5 @@
 
 ## Setup
 
-* Install `libvpx` and `libwebm`
+* have `gcc` installed
+* install `libvpx` and `libwebm` globally
