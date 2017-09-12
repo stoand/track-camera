@@ -20,6 +20,15 @@
             "args": [],
             "cwd": "${workspaceRoot}",
             "preLaunchTask": "preTest"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Test Glue",
+            "program": "${workspaceRoot}/webm_parser_glue/webm_parser_glue_test",
+            "args": [],
+            "cwd": "${workspaceRoot}/webm_parser_glue",
+            "preLaunchTask": "preGlueTest"
         }
     ]
 }

@@ -18,6 +18,17 @@
             "presentation": {
                 "reveal": "never"
             }
+        },
+        {
+            "taskName": "preGlueTest",
+            "command": "rm webm_parser_glue_test -f; ./build_test.sh",
+            "options": {
+                "cwd": "${workspaceRoot}/webm_parser_glue"
+            },
+            "type": "shell",
+            "presentation": {
+                "reveal": "never"
+            }
         }
     ]
 }
