@@ -32,4 +32,5 @@ fn main() {
         .compile("webm_parser_glue");
 
     println!("cargo:rustc-link-lib=webm");
+    println!("cargo:rustc-link-lib=vpx");
 }

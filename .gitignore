@@ -12,3 +12,4 @@ compile_commands.json
 CTestTestfile.cmake
 
 webm_parser_glue_test
+webm_parser_glue/decoded_yuv
