@@ -20,22 +20,19 @@ using webm::Reader;
 namespace webm_parser_glue
 {
 
-class GlueCallback : public webm::Callback
+class WebmParser : public webm::Callback
 {
-  public:
-    GlueCallback();
-    Status OnFrame(const FrameMetadata &, Reader *reader, std::uint64_t *bytes_remaining) override;
-    vector<vpx_image_t*> images;
-  private:
-    vpx_codec_ctx_t codec;
-};
+public:
+  WebmParser() = default;
+  Status parse(uint8_t *buf, size_t buf_size);
+  Status OnFrame(const FrameMetadata &, Reader *reader, std::uint64_t *bytes_remaining) override;
 
-struct WebmData
-{
-    webm::Status status;
-    vpx_image_t **img;
-    uint64_t img_count;
-};
+  vector<uint8_t *> parsed_imgs;
+  size_t d_w = 0;
+  size_t d_h = 0;
 
-WebmData parse_webm_bytes(const std::uint8_t *buf, std::size_t buf_size);
+private:
+  void OnImageParsed(vpx_image_t *img);
+  vpx_codec_ctx_t codec;
+};
 }
