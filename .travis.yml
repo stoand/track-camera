@@ -25,6 +25,7 @@ script:
 - git pull
 - ./configure --disable-examples --disable-docs --enable-shared --disable-static
 - make -j4
+- sudo cp libvpx.so* /usr/lib
 - sudo make install
 - cd ..
 
