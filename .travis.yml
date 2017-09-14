@@ -17,7 +17,7 @@ script:
 # Install catch for the C++ webm_parser_glue tests
 - sudo wget https://raw.githubusercontent.com/philsquared/Catch/master/single_include/catch.hpp -o /usr/include/catch.hpp
 
-# Test C++ glue
+# Test C++ glue 
 - (cd webm_parser_glue && ./build_test.sh && ./webm_parser_glue_test)
 
 # Test Project
