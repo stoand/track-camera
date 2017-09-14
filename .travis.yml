@@ -1,15 +1,27 @@
 language: rust
+cache:
+  cargo: true
+  directories:
+    - CMake
+    - libwebm
 rust:
   - nightly
 script:
 
 - sudo apt-get -qq update
-- sudo apt-get install -y wget libvpx-dev cmake gcc
+- sudo apt-get install -y wget libvpx-dev
+
+# Install newer cmake ~3.5 or above
+- git clone https://github.com/Kitware/CMake || echo 'CMake already cloned'
+- cd CMake
+- cmake .
+- make -j16
+- cd ..
 
 # Install libwebm
-- git clone https://chromium.googlesource.com/webm/libwebm
+- git clone https://chromium.googlesource.com/webm/libwebm || echo 'libwebm already cloned'
 - cd libwebm
-- 'cmake . -DENABLE_WEBM_PARSER:BOOL=ON'
+- '../CMake/bin/cmake . -DENABLE_WEBM_PARSER=ON'
 - make -j16
 - sudo cp libwebm.a /usr/lib/
 - sudo cp webm_parser/include/webm/ /usr/include/ -r
