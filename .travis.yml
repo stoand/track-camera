@@ -21,7 +21,7 @@ script:
 # Install libwebm
 - git clone https://chromium.googlesource.com/webm/libwebm || echo 'libwebm already cloned'
 - cd libwebm
-- '../CMake/bin/cmake . -DENABLE_WEBM_PARSER=ON'
+- ../CMake/bin/cmake . -DENABLE_WEBM_PARSER:BOOL=ON
 - make -j16
 - sudo cp libwebm.a /usr/lib/
 - sudo cp webm_parser/include/webm/ /usr/include/ -r
