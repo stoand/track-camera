@@ -4,25 +4,28 @@ cache:
   directories:
     - CMake
     - libwebm
+    - libvpx
 rust:
   - nightly
 script:
-
-- sudo apt-get -qq update
-- sudo apt-get install -y wget libvpx-dev
-
 # Install newer cmake ~3.5 or above
 - git clone https://github.com/Kitware/CMake || echo 'CMake already cloned'
 - cd CMake
 - cmake .
-- make -j16
+- make -j4
 - cd ..
+
+# Install libvpx
+- git clone https://chromium.googlesource.com/webm/libvpx || echo 'libvpx already cloned'
+- ./configure --disable-examples --disable-docs --enable-shared --disable-static
+- make -j4
+- sudo make install
 
 # Install libwebm
 - git clone https://chromium.googlesource.com/webm/libwebm || echo 'libwebm already cloned'
 - cd libwebm
 - ../CMake/bin/cmake . -DENABLE_WEBM_PARSER:BOOL=ON
-- make -j16
+- make -j4
 - sudo cp libwebm.a /usr/lib/
 - sudo cp webm_parser/include/webm/ /usr/include/ -r
 - cd ..
