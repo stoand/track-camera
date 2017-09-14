@@ -13,6 +13,7 @@ script:
 - make -j16
 - sudo cp libwebm.a /usr/lib/
 - sudo cp webm_parser/include/webm/ /usr/include/ -r
+- cd ..
 
 # Install catch for the C++ webm_parser_glue tests
 - sudo wget https://raw.githubusercontent.com/philsquared/Catch/master/single_include/catch.hpp -o /usr/include/catch.hpp
