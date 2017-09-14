@@ -3,6 +3,22 @@
 namespace webm_parser_glue
 {
 
+int vpx_img_plane_width(const vpx_image_t *img, int plane)
+{
+    if (plane > 0 && img->x_chroma_shift > 0)
+        return (img->d_w + 1) >> img->x_chroma_shift;
+    else
+        return img->d_w;
+}
+
+int vpx_img_plane_height(const vpx_image_t *img, int plane)
+{
+    if (plane > 0 && img->y_chroma_shift > 0)
+        return (img->d_h + 1) >> img->y_chroma_shift;
+    else
+        return img->d_h;
+}
+
 Status WebmParser::parse(uint8_t *buf, size_t buf_size)
 {
     vpx_codec_dec_init(&codec, vpx_codec_vp8_dx(), NULL, 0);
@@ -54,20 +70,31 @@ void WebmParser::OnImageParsed(vpx_image_t *img)
         d_h = img->d_h;
     }
 
-    uint8_t *parsed_img = new uint8_t[d_w * d_h];
-    parsed_imgs.push_back(parsed_img);
+    uint8_t *parsed_img_cursor = new uint8_t[d_w * d_h];
+    // copy the start of the parsed image buffer
+    parsed_imgs.push_back(parsed_img_cursor);
+
+    int total_bytes = 0;
 
     for (int plane = 0; plane < 3; ++plane)
     {
-        const unsigned char *plane_buf = img->planes[plane];
+        const unsigned char *plane_cursor = img->planes[plane];
         const int stride = img->stride[plane];
 
-        for (int y = 0; y < d_h; ++y)
+        const int w = vpx_img_plane_width(img, plane) *
+                      ((img->fmt & VPX_IMG_FMT_HIGHBITDEPTH) ? 2 : 1);
+        const int h = vpx_img_plane_height(img, plane);
+
+        for (int y = 0; y < h; ++y)
         {
-            std::copy(plane_buf, plane_buf + d_w, parsed_img);
-            plane_buf += stride;
-            parsed_img += d_w;
+            std::copy(plane_cursor, plane_cursor + w, parsed_img_cursor);
+            plane_cursor += stride;
+            parsed_img_cursor += w;
+
+            total_bytes += w;
         }
     }
+
+    total_bytes;
 }
 }

@@ -20,6 +20,9 @@ using webm::Reader;
 namespace webm_parser_glue
 {
 
+int vpx_img_plane_width(const vpx_image_t *img, int plane);
+int vpx_img_plane_height(const vpx_image_t *img, int plane);
+
 class WebmParser : public webm::Callback
 {
 public:
