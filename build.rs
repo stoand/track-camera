@@ -29,6 +29,7 @@ fn main() {
     // build webm parser glue c++ code
     gcc::Build::new()
         .cpp(true)
+        .flag("-std=c++11")
         .file("webm_parser_glue/webm_parser_glue.cc")
         .compile("webm_parser_glue");
 
