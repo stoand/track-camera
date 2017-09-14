@@ -17,8 +17,8 @@ script:
 
 # Install libvpx
 - git clone https://chromium.googlesource.com/webm/libvpx || echo 'libvpx already cloned'
-- ./configure --disable-examples --disable-docs --enable-shared --disable-static
 - cd libvpx
+- ./configure --disable-examples --disable-docs --enable-shared --disable-static
 - make -j4
 - sudo make install
 

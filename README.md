@@ -1,4 +1,4 @@
-# Track Camera
+# Track Camera ![https://travis-ci.org/stoand/track-camera.svg?branch=travis_config]
 
 Derive 3D movement data from recorded video
 
