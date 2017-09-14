@@ -23,7 +23,7 @@ Status WebmParser::parse(uint8_t *buf, size_t buf_size)
 {
     vpx_codec_dec_init(&codec, vpx_codec_vp8_dx(), NULL, 0);
 
-    auto vec = vector<uint8_t>(buf, &buf[buf_size - 1]);
+    auto vec = vector<uint8_t>(buf, buf + buf_size);
     webm::BufferReader buf_read(vec);
     return webm::WebmParser().Feed(this, &buf_read);
 }
@@ -70,11 +70,11 @@ void WebmParser::OnImageParsed(vpx_image_t *img)
         d_h = img->d_h;
     }
 
-    uint8_t *parsed_img_cursor = new uint8_t[d_w * d_h];
-    // copy the start of the parsed image buffer
-    parsed_imgs.push_back(parsed_img_cursor);
+    size_t img_buff_size = d_w * (d_h * 1.5);
+    uint8_t *parsed_img_cursor = new uint8_t[img_buff_size];
 
-    int total_bytes = 0;
+    // add the start of the parsed image cursor
+    parsed_imgs.push_back(parsed_img_cursor);
 
     for (int plane = 0; plane < 3; ++plane)
     {
@@ -90,11 +90,7 @@ void WebmParser::OnImageParsed(vpx_image_t *img)
             std::copy(plane_cursor, plane_cursor + w, parsed_img_cursor);
             plane_cursor += stride;
             parsed_img_cursor += w;
-
-            total_bytes += w;
         }
     }
-
-    total_bytes;
 }
 }

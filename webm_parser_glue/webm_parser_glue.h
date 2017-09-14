@@ -14,6 +14,7 @@ using webm::FrameMetadata;
 using webm::ElementMetadata;
 using webm::Action;
 using webm::Reader;
+using webm::Info;
 
 #define VP8_FOURCC 0x30385056
 

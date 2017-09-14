@@ -37,7 +37,7 @@ TEST_CASE("Webm Parser", "[webm_parser]")
 
     FILE *outfile = fopen("decoded_yuv", "wb");
     for (int i = 0; i < parser.parsed_imgs.size(); i++) {
-        fwrite(parser.parsed_imgs[i], 1, parser.d_w * parser.d_h, outfile);
+        fwrite(parser.parsed_imgs[i], 1, parser.d_w * (parser.d_h * 1.5), outfile);
     }
     fclose(outfile);
 
