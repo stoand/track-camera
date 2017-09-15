@@ -12,17 +12,17 @@ script:
 - sudo apt-get install -y yasm
 
 # Install newer cmake ~3.5 or above
-- git clone https://github.com/Kitware/CMake || echo 'CMake already cloned'
+- git clone https://github.com/Kitware/CMake --depth=1 || echo 'CMake already cloned'
 - cd CMake
-- git pull
+- git pull --depth=1
 - cmake .
 - make -j4
 - cd ..
 
 # Install libvpx
-- git clone https://chromium.googlesource.com/webm/libvpx || echo 'libvpx already cloned'
+- git clone https://chromium.googlesource.com/webm/libvpx --depth=1 || echo 'libvpx already cloned'
 - cd libvpx
-- git pull
+- git pull --depth=1
 - ./configure --disable-examples --disable-docs --enable-shared --disable-static
 - make -j4
 - sudo cp libvpx.so* /usr/lib
@@ -30,9 +30,9 @@ script:
 - cd ..
 
 # Install libwebm
-- git clone https://chromium.googlesource.com/webm/libwebm || echo 'libwebm already cloned'
+- git clone https://chromium.googlesource.com/webm/libwebm --depth=1 || echo 'libwebm already cloned'
 - cd libwebm
-- git pull
+- git pull --depth=1
 - ../CMake/bin/cmake . -DENABLE_WEBM_PARSER:BOOL=ON
 - make -j4
 - sudo cp libwebm.a /usr/lib/
