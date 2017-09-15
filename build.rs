@@ -14,7 +14,7 @@ fn main() {
         // bindings for.
         .header("webm_parser_glue/webm_parser_glue.h")
         .enable_cxx_namespaces()
-        .clang_args(&["-x", "c++", "-std=c++11"])
+        .clang_args(&["-x", "c++", "-std=c++11", "-fPIC"])
         .whitelisted_type("webm_parser_glue::WebmParser")
         .layout_tests(false)
         .generate()
@@ -30,6 +30,7 @@ fn main() {
     gcc::Build::new()
         .cpp(true)
         .flag("-std=c++11")
+        .flag("-fPIC")
         .file("webm_parser_glue/webm_parser_glue.cc")
         .compile("webm_parser_glue");
 
