@@ -18,12 +18,15 @@ impl<'a> webm::ImgBuf {
     }
 }
 
+/// Decodes a VP8 encoded `.webm` file into raw 4:2:2 YUV bytes
+pub fn parse_webm_bytes(bytes: &[u8]) -> Vec<Vec<u8>> {
+    let mut parser = unsafe { webm::WebmParser::new() };
+    let status = unsafe { parser.parse(bytes.as_ptr(), bytes.len()) };
+    
+    unsafe { parser.GetImgBuf() }.to_vec()
+}
+
 #[test]
 fn test_parse_webm() {
-    let sample_bytes = include_bytes!("../samples/trackme.webm");
-
-    let mut parser = unsafe { webm::WebmParser::new() };
-    let status = unsafe { parser.parse(sample_bytes.as_ptr(), sample_bytes.len()) };
-    
-    let images = unsafe { parser.GetImgBuf() }.to_vec();
+    let _ = parse_webm_bytes(include_bytes!("../samples/trackme.webm"));
 }
