@@ -12,7 +12,12 @@ use super::bindgen_bindings::root::webm_parser_glue as webm;
 fn test_parse_webm() {
     let sample_bytes = include_bytes!("../samples/trackme.webm");
 
-    let parser = unsafe { webm::WebmParser::new() };
+    let mut parser = unsafe { webm::WebmParser::new() };
+    let status = unsafe { parser.parse(sample_bytes.as_ptr(), sample_bytes.len()) };
+
+    let status = unsafe { parser.parse(sample_bytes.as_ptr(), sample_bytes.len()) };
+
+
 
     // let data =
     //     unsafe { webm::parse_webm_bytes(sample_bytes.as_ptr(), sample_bytes.len()) };

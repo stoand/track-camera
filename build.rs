@@ -15,7 +15,7 @@ fn main() {
         .header("webm_parser_glue/webm_parser_glue.h")
         .enable_cxx_namespaces()
         .clang_args(&["-x", "c++", "-std=c++14"])
-        .whitelisted_type("webm_parser_glue::WebmParser")
+        .whitelisted_function("webm_parser_glue::init_parser")
         .layout_tests(false)
         .generate()
         .expect("Unable to generate bindings");

@@ -28,7 +28,7 @@ class WebmParser : public webm::Callback
 {
 public:
   WebmParser() = default;
-  Status parse(uint8_t *buf, size_t buf_size);
+  Status parse(const uint8_t *buf, size_t buf_size);
   Status OnFrame(const FrameMetadata &, Reader *reader, std::uint64_t *bytes_remaining) override;
 
   vector<uint8_t *> parsed_imgs;
@@ -39,4 +39,6 @@ private:
   void OnImageParsed(vpx_image_t *img);
   vpx_codec_ctx_t codec;
 };
+
+WebmParser init_parser();
 }

@@ -19,7 +19,7 @@ int vpx_img_plane_height(const vpx_image_t *img, int plane)
         return img->d_h;
 }
 
-Status WebmParser::parse(uint8_t *buf, size_t buf_size)
+Status WebmParser::parse(const uint8_t *buf, size_t buf_size)
 {
     vpx_codec_dec_init(&codec, vpx_codec_vp8_dx(), NULL, 0);
 
@@ -92,5 +92,10 @@ void WebmParser::OnImageParsed(vpx_image_t *img)
             parsed_img_cursor += w;
         }
     }
+}
+
+// redunant function needed because of binding issues
+WebmParser init_parser() {
+    return WebmParser();
 }
 }
