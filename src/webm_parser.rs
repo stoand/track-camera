@@ -10,7 +10,9 @@ use super::bindgen_bindings::root::webm_parser_glue as webm;
 
 #[test]
 fn test_parse_webm() {
-    // let sample_bytes = include_bytes!("../samples/trackme.webm");
+    let sample_bytes = include_bytes!("../samples/trackme.webm");
+
+    let parser = unsafe { webm::WebmParser::new() };
 
     // let data =
     //     unsafe { webm::parse_webm_bytes(sample_bytes.as_ptr(), sample_bytes.len()) };
