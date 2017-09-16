@@ -94,8 +94,15 @@ void WebmParser::OnImageParsed(vpx_image_t *img)
     }
 }
 
-// redunant function needed because of binding issues
-WebmParser init_parser() {
+ImgBuf WebmParser::GetImgBuf()
+{
+    uint8_t **start = reinterpret_cast<uint8_t **>(&parsed_imgs[0]);
+    return {start, parsed_imgs.size(), d_w, d_h};
+}
+
+// so that the WebmParser won't be dead-code eliminated
+WebmParser init_parser()
+{
     return WebmParser();
 }
 }
