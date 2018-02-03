@@ -5,7 +5,7 @@
     "tasks": [
         {
             "taskName": "preRun",
-            "command": "cargo build",
+            "command": "cargo build --example basic",
             "type": "shell",
             "presentation": {
                 "reveal": "never"
